@@ -1,6 +1,7 @@
 import webbrowser
 print("""
-Author site: pistoletoff.ru | FindMePlease ver. 1.4a
+Author site: pistoletoff.ru | FindMePlease ver. 1.5
+Github: github.com/DanilPistoletov/FindMePlease/
 
 computerinfo - информация о компьютере
 search [запрос] - поиск информации в поисковиках
@@ -10,6 +11,7 @@ social [запрос] - поиск по разным социальным сет
 ok [запрос] - поиск информации по Одноклассникам
 domain [домен] - получение информации о домене
 ip [IP-адрес] - получение информации об IP-адресе
+profile [запрос] - поиск профилей по никам
 other [запрос] - поиск информации по прочим источникам
 """)
 
@@ -66,38 +68,56 @@ def other(request):
     webbrowser.open('https://archive.org/search?query=' + request, new=2)
     webbrowser.open('https://dtf.ru/discovery?q=' + request, new=2)
     webbrowser.open('https://yandex.ru/search/?text=' + "\"" + request + "\"" + " site:doxbin.org", new=2)
+    webbrowser.open('https://github.com/search?q=' + request, new=2)
 
 def domain(request):
     import ipwhois, socket
     webbrowser.open('https://web.archive.org/web/20250000000000*/' + request, new=2)
     request = socket.gethostbyname(request)
-    print("Whois:\n", ipwhois.IPWhois(request).lookup_whois())
-    print("RDAP:\n", ipwhois.IPWhois(request).lookup_rdap())
+    whois = str(ipwhois.IPWhois(request).lookup_whois())
+    whois = whois.replace(',', ',\n')
+    rdap = str(ipwhois.IPWhois(request).lookup_rdap())
+    rdap = rdap.replace(',', ',\n')
+    print("Whois:\n", whois)
+    print("RDAP:\n", rdap)
 
 def ip(request):
     import ipwhois
-    print("Whois:\n", ipwhois.IPWhois(request).lookup_whois())
-    print("RDAP:\n", ipwhois.IPWhois(request).lookup_rdap())
+    whois = str(ipwhois.IPWhois(request).lookup_whois())
+    whois = whois.replace(',', ',\n')
+    rdap = str(ipwhois.IPWhois(request).lookup_rdap())
+    rdap = rdap.replace(',', ',\n')
+    print("Whois:\n", whois)
+    print("RDAP:\n", rdap)
+
+def profile(request):
+    webbrowser.open('https://shikimori.one/' + request, new=2)
+    webbrowser.open('https://my.mail.ru/mail/' + request, new=2)
 
 while 1:
     text = input()
-    if text == "computerinfo":
-        computerinfo()
-    elif text[:6] == "search":
-        search(text[7:])
-    elif text[:2] == "vk":
-        vk(text[3:])
-    elif text[:7] == "science":
-        science(text[8:])
-    elif text[:6] == "social":
-        social(text[7:])
-    elif text[:2] == "ok":
-        ok(text[3:])
-    elif text[:5] == "other":
-        other(text[6:])
-    elif text[:6] == "domain":
-        domain(text[7:])
-    elif text[:2] == "ip":
-        ip(text[3:])
-    else:
-        print("Неизвестный запрос")
+    try:
+        if text.lower() == "computerinfo":
+            computerinfo()
+        elif text[:6].lower() == "search":
+            search(text[7:])
+        elif text[:2].lower() == "vk":
+            vk(text[3:])
+        elif text[:7].lower() == "science":
+            science(text[8:])
+        elif text[:6].lower() == "social":
+            social(text[7:])
+        elif text[:2].lower() == "ok":
+            ok(text[3:])
+        elif text[:5].lower() == "other":
+            other(text[6:])
+        elif text[:6].lower() == "domain":
+            domain(text[7:])
+        elif text[:2].lower() == "ip":
+            ip(text[3:])
+        elif text[:7].lower() == "profile":
+            profile(text[8:])
+        else:
+            print("Неизвестный запрос")
+    except:
+        print("Произошла ошибка")
