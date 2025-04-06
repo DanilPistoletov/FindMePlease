@@ -1,18 +1,20 @@
 import webbrowser
 print("""
-Author site: pistoletoff.ru | FindMePlease ver. 1.5
+Сайт автора: pistoletoff.ru | FindMePlease ver. 1.6
 Github: github.com/DanilPistoletov/FindMePlease/
 
 computerinfo - информация о компьютере
 search [запрос] - поиск информации в поисковиках
 vk [запрос] - поиск информации по Вконтакте
 science [запрос] - поиск по научным базам
-social [запрос] - поиск по разным социальным сетям
+social [запрос] - поиск профиля
 ok [запрос] - поиск информации по Одноклассникам
 domain [домен] - получение информации о домене
 ip [IP-адрес] - получение информации об IP-адресе
-profile [запрос] - поиск профилей по никам
+email [email-адрес] - поиск информации по Email-адресу
+telegram [имя пользователя] - поиск информации по имени пользователя Telegram
 other [запрос] - поиск информации по прочим источникам
+all [запрос] - поиск информации по всем пунктам (vk, telegram, science, social, ok, other)
 """)
 
 def computerinfo():
@@ -57,6 +59,10 @@ def science(request):
 def social(request):
     webbrowser.open('https://www.youtube.com/results?search_query=' + request, new=2)
     webbrowser.open('https://www.tumblr.com/search/' + request, new=2)
+    webbrowser.open('https://shikimori.one/' + request, new=2)
+    webbrowser.open('https://my.mail.ru/mail/' + request, new=2)
+    webbrowser.open('https://' + request + '.livejournal.com', new=2)
+    webbrowser.open('https://mangabuff.ru/search?type=user&q=' + request, new=2)
 
 def ok(request):
     webbrowser.open('https://ok.ru/dk?st.cmd=searchResult&st.mode=Content&st.query=' + request, new=2)
@@ -90,9 +96,16 @@ def ip(request):
     print("Whois:\n", whois)
     print("RDAP:\n", rdap)
 
-def profile(request):
-    webbrowser.open('https://shikimori.one/' + request, new=2)
-    webbrowser.open('https://my.mail.ru/mail/' + request, new=2)
+def email(request):
+    webbrowser.open('https://yandex.ru/search/?text=' + "\"" + request + "\"", new=2)
+    webbrowser.open('https://www.google.ru/search?q=' + "\"" + request + "\"", new=2)
+
+def telegram(request):
+    webbrowser.open('https://yandex.ru/search/?text=' + "\"" + request + "\"", new=2)
+    webbrowser.open('https://www.google.ru/search?q=' + "\"" + request + "\"", new=2)
+    webbrowser.open('https://t.me/' + request, new=2)
+    webbrowser.open('https://tgstat.ru/channel/@' + request, new=2)
+
 
 while 1:
     text = input()
@@ -115,9 +128,19 @@ while 1:
             domain(text[7:])
         elif text[:2].lower() == "ip":
             ip(text[3:])
-        elif text[:7].lower() == "profile":
-            profile(text[8:])
+        elif text[:5].lower() == "email":
+            email(text[6:])
+        elif text[:8].lower() == "telegram":
+            telegram(text[9:])
+        elif text[:3].lower() == "all":
+            vk(text[4:])
+            telegram(text[4:])
+            science(text[4:])
+            social(text[4:])
+            ok(text[4:])
+            other(text[4:])
         else:
             print("Неизвестный запрос")
-    except:
+    except Exception as e:
         print("Произошла ошибка")
+        print(e)

@@ -1,0 +1,67 @@
+1.0:
+Добавлена команда computerinfo
+
+1.0a:
+В команде computerinfo библиотека os заменена на platform и psutil
+Дополнена команда computerinfo
+
+1.1:
+Добавлена команда search
+Добавлена команда vk
+
+1.2:
+Добавлена команда science
+В search добавлены Duckduckgo и Bing
+Добавлена комадна social
+
+1.3:
+Добавлена команда ok
+В search добавлены Baidu и Yahoo
+В social добавлен Tumblr
+В science добавлены Google Scholar и ResearchGate
+
+1.4:
+В search добавлен Brave
+В science добавлены:
+-Социологический центр РАН
+-Academia
+-Refseek
+-Scholar
+-Link Springer
+Добавлена команда other
+-Web Archive
+-DTF
+-Doxbin
+Добавлен ответ на несуществующие команды
+Добавлена команда domain с WHOIS и RDAP
+Добавлена команда ip с WHOIS и RDAP
+
+1.4a:
+Исправлена небольшая ошибка с командой other
+В domain добавлено направление на Wayback Machine
+
+1.5:
+Команды больше не чувствительны к регистру
+Добавлен обработчик ошибок
+Добавлена ссылка на Github
+В other добавлен github
+Добавлена команда profile:
+-Mailru
+-Shikimori
+Команда domain приведена к более читаемому виду
+Команда ip приведена к более читаемому виду
+
+1.6:
+Команда profile включена в команду social
+Дополнена команда social:
+-Livejournal
+-Mangabuff
+Ошибки теперь выводятся
+Добавлена команда email
+Добавлена команда telegram:
+-Telegram
+-Tgstat
+-Яндекс
+-Google
+Небольшие изменения в описании
+Добавлена команда all
